@@ -12,23 +12,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
-    /* VARIÁVEIS DE DESIGN - Estética Psicanalítica (Tons Terrosos e Serenos) */
+    /* VARIÁVEIS DE DESIGN */
     :root {
-      --primary: #5d6d7e;    /* Cinza azulado sóbrio */
-      --accent: #a98467;     /* Tom terroso suave */
-      --bg-light: #fdfbf9;   /* Off-white quente */
-      --bg-alt: #f4f1ee;     /* Bege muito claro para contraste */
+      --primary: #5d6d7e;
+      --accent: #a98467;
+      --bg-light: #fdfbf9;
+      --bg-alt: #f4f1ee;
       --text: #3a3a3a;
       --font-serif: 'Playfair Display', serif;
       --font-sans: 'Inter', sans-serif;
     }
 
-    /* RESET E BASE */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--font-sans);
@@ -38,7 +33,6 @@
       scroll-behavior: smooth;
     }
 
-    /* LAYOUT CONTAINERS */
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -90,19 +84,11 @@
       transition: color 0.3s;
     }
 
-    .nav-links a:hover {
-      color: var(--accent);
-    }
+    .nav-links a:hover { color: var(--accent); }
 
     /* SEÇÕES */
-    .section {
-      padding: 100px 0;
-      text-align: center;
-    }
-
-    .alt-bg {
-      background-color: var(--bg-alt);
-    }
+    .section { padding: 100px 0; text-align: center; }
+    .alt-bg { background-color: var(--bg-alt); }
 
     h1, h2 {
       font-family: var(--font-serif);
@@ -120,7 +106,6 @@
       margin: 0 auto 30px;
     }
 
-    /* BADGE DE ATENDIMENTO */
     .badge-atendimento {
       display: inline-block;
       padding: 6px 16px;
@@ -145,9 +130,7 @@
       box-shadow: 20px 20px 0px var(--bg-alt);
       transition: transform 0.4s ease;
     }
-    .home img:hover {
-      transform: scale(1.02);
-    }
+    .home img:hover { transform: scale(1.02); }
 
     /* BOTÕES */
     .btn-primary, .btn-secondary {
@@ -162,21 +145,20 @@
       font-family: var(--font-sans);
     }
 
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      margin-top: 15px;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--primary);
-      color: var(--primary);
-    }
+    .btn-primary { background: var(--primary); color: white; margin-top: 15px; }
+    .btn-secondary { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
 
     .btn-primary:hover, .btn-secondary:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+
+    .waiting-time {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 10px;
+      font-style: italic;
     }
 
     /* CONTATO GRID */
@@ -212,13 +194,19 @@
 
     .contact-item a:hover { color: var(--accent); }
 
-    /* FOOTER */
+    /* FOOTER CENTRALIZADO */
     footer {
-      text-align: center;
       padding: 60px 20px;
+      background: var(--bg-alt);
+      text-align: center;
+      width: 100%;
+    }
+
+    footer p {
       font-size: 0.85rem;
       color: #888;
-      background: var(--bg-alt);
+      margin: 0;
+      display: inline-block;
     }
 
     /* RESPONSIVIDADE */
@@ -229,6 +217,7 @@
       .nav-links { display: none; }
       .contact-grid { grid-template-columns: 1fr; }
       .contact-item { grid-column: span 1 !important; }
+      .btn-primary, .btn-secondary { width: 100%; }
     }
   </style>
 </head>
@@ -253,7 +242,8 @@
         <div class="badge-atendimento">Atendimento online e presencial</div>
         <h1>Cuidado emocional e autoconhecimento</h1>
         <p>A jornada da psicanálise como um espaço de escuta e transformação pessoal.</p>
-        <a href="#agendamento" class="btn-primary">Iniciar Processo</a>
+        <button onclick="agendar()" class="btn-primary">Iniciar Processo</button>
+        <span class="waiting-time">Responderei em breve.</span>
       </div>
       <div class="home-image">
         <img src="images/elis_bio.jpeg" alt="Elis Martelli" onerror="this.src='https://via.placeholder.com/400x500?text=Elis+Martelli'">
@@ -274,6 +264,7 @@
       <h2>Faça seu Agendamento</h2>
       <p>Ofereço sessões presenciais e online, adaptadas à sua necessidade e tempo.</p>
       <button class="btn-secondary" onclick="agendar()">Agendar Agora</button>
+      <span class="waiting-time">Retorno rápido via WhatsApp.</span>
     </div>
   </section>
 
@@ -289,7 +280,8 @@
         <div class="contact-item">
           <i class="fab fa-whatsapp"></i>
           <strong>WhatsApp</strong>
-          <p>(15) 99818-5111</p>
+          <p><a href="javascript:void(0)" onclick="agendar()">(15) 99818-5111</a></p>
+          <span style="font-size: 0.7rem; color: #999;">Clique para conversar</span>
         </div>
         <div class="contact-item" style="grid-column: span 2;">
           <i class="far fa-envelope"></i>
@@ -307,13 +299,15 @@
 
 <script>
   /**
-   * Função para redirecionamento ao WhatsApp
+   * Função para redirecionamento ao WhatsApp com mensagem de saudação
    */
   function agendar() {
-    const confirmacao = confirm("Deseja abrir o WhatsApp para agendar sua consulta?");
+    const mensagem = encodeURIComponent("Olá Elis, vi seu site e gostaria de saber mais sobre o atendimento. Aguardo seu retorno!");
+    const telefone = "5515998185111";
+    
+    const confirmacao = confirm("Deseja abrir o WhatsApp para agendar sua consulta? Em breve responderemos sua mensagem.");
     if (confirmacao) {
-      // Número internacional: 55 (Brasil) + 15 (DDD) + 998185111
-      window.open("https://wa.me/5515998185111?text=Olá,%20gostaria%20de%20agendar%20uma%20sessão.", "_blank");
+      window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
     }
   }
 
