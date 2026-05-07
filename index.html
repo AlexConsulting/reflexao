@@ -92,7 +92,7 @@ body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
 <div id="app">
 <div class="hdr">
   <div class="hdr-l">
-    <div class="logo"><i class="ti ti-feather"></i></div>
+    <div class="logo"><i class="ti ti-book"></i></div>
     <div>
       <div class="hdr-title">Devocionais Diários</div>
       <div class="hdr-sub">Uma inspiração para seu dia</div>
@@ -194,7 +194,13 @@ function updateTopButton(){
 }
 
 function handleAudio(){
-  if(!showAud){showAud=true;render();setTimeout(startRead,80);return}
+  if(!showAud){
+    showAud=true;
+    audPlay=true; // Já definimos como tocando antes de renderizar
+    render();
+    setTimeout(startRead,80);
+    return;
+  }
   stopAudio();
 }
 
@@ -226,8 +232,6 @@ function updateAud(){
 function doShare(){
   const d=devs[cur];
   const pageLink = window.location.href;
-  
-  // Mensagem formatada com simulação de botão clicável no WhatsApp
   const txt = '✨ *' + d.titulo + '*\n\n' +
               '_' + d.ref + '_\n' +
               '"' + d.verso + '"\n\n' +
