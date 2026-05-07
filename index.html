@@ -12,6 +12,13 @@
 --progress-active:#6c63ff;--progress-done:#b8b4f5;
 --footer-bg:#f0efff;
 }
+/* Estilo para Versão Teens */
+.teens-mode {
+--accent:#00c2a8;--accent2:#00e0c2;--accent-bg:#e6fffb;
+--verse-bg:#e6fffb;--verse-border:#00c2a8;
+--pill-bg:#00c2a822;--pill-text:#008573;
+--progress-active:#00c2a8;--progress-done:#a7e9e1;
+}
 .dm{
 --bg:#0f0e1a;--card:#18162a;--border:#2e2b4a;
 --accent:#8b84ff;--accent2:#b0aaff;--accent-bg:#1e1c38;
@@ -22,16 +29,26 @@
 --progress-active:#8b84ff;--progress-done:#3d3870;
 --footer-bg:#13112200;
 }
+.dm.teens-mode {
+--accent:#00f2d5;--accent2:#5effec;--accent-bg:#0d2b27;
+--verse-bg:#0d2b27;--verse-border:#00f2d5;
+--pill-bg:#00f2d522;--pill-text:#00f2d5;
+}
 body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
-#app{background:var(--bg);border-radius:18px;border:0.5px solid var(--border);overflow:hidden;transition:background .3s,color .3s;max-width:500px;margin:auto}
+#app{background:var(--bg);border-radius:18px;border:0.5px solid var(--border);overflow:hidden;transition:all .3s;max-width:500px;margin:auto}
 @media(max-width:500px){#app{border-radius:0;border:none}}
 
 .hdr{background:var(--card);border-bottom:0.5px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
 .hdr-l{display:flex;align-items:center;gap:10px}
-.logo{width:38px;height:38px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:19px}
+.logo{width:38px;height:38px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:19px;transition:background .3s}
 .hdr-title{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.01em}
 .hdr-sub{font-size:11px;color:var(--text3);margin-top:1px}
 .hdr-r{display:flex;gap:6px}
+
+.teens-toggle {display: flex;justify-content: center;padding: 10px;background: var(--card);border-bottom: 0.5px solid var(--border)}
+.tgl-btn {background: var(--pill-bg);color: var(--pill-text);border: 1px solid var(--accent);padding: 6px 15px;border-radius: 20px;font-size: 11px;font-weight: 800;cursor: pointer;display: flex;align-items: center;gap: 6px;transition: all 0.2s}
+.tgl-btn.active {background: var(--accent);color: #fff}
+
 .ibtn{width:34px;height:34px;border-radius:9px;border:0.5px solid var(--border);background:var(--card);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .15s,color .15s}
 .ibtn:hover{background:var(--accent-bg);color:var(--accent)}
 
@@ -39,7 +56,7 @@ body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
 .prog-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .day-lbl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em}
 .dots{display:flex;gap:6px;align-items:center;justify-content:center}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .25s,width .25s,border-radius .25s}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .25s}
 .dot.active{width:28px;border-radius:4px;background:var(--progress-active)}
 .dot.done{background:var(--progress-done)}
 
@@ -49,7 +66,6 @@ body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
 @keyframes fs{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;background:var(--pill-bg);color:var(--pill-text);border-radius:20px;padding:3px 11px;margin-bottom:11px;letter-spacing:.04em;text-transform:uppercase}
-.pill i{font-size:13px}
 .day-title{font-size:21px;font-weight:700;color:var(--text);letter-spacing:-.02em;margin-bottom:14px;line-height:1.25}
 
 .audio-row{display:flex;align-items:center;gap:10px;background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:14px}
@@ -57,7 +73,6 @@ body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
 .play-btn, .stop-btn{width:34px;height:34px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .15s}
 .play-btn{background:var(--accent);color:#fff}
 .stop-btn{background:var(--border);color:var(--text2)}
-.play-btn:hover{background:var(--accent2)}
 .a-info{flex:1;min-width:0}
 .a-name{font-size:11px;font-weight:600;color:var(--text);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .a-track{width:100%;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
@@ -77,16 +92,14 @@ body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
 .prayer{background:var(--prayer-bg);border:0.5px solid var(--prayer-border);border-radius:10px;padding:13px 15px;font-family:Georgia,serif;font-style:italic;font-size:14px;color:var(--text2);line-height:1.7}
 
 .foot{padding:12px 20px 14px;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card)}
-.nav-btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:9px;border:0.5px solid var(--border);background:var(--card);color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:9px;border:0.5px solid var(--border);background:var(--card);color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
 .nav-btn:hover{background:var(--accent-bg);color:var(--accent);border-color:var(--accent2)}
 .nav-btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
-.nav-btn.pri:hover{background:var(--accent2);border-color:var(--accent2)}
 .nav-btn:disabled{opacity:.35;pointer-events:none}
 
 .site-footer{text-align:center;padding:10px 20px 14px;background:var(--footer-bg)}
 .site-footer span{font-size:11px;color:var(--text3)}
 .site-footer i{font-size:12px;vertical-align:-1px;color:var(--accent)}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 </style>
 
 <div id="app">
@@ -103,6 +116,12 @@ body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
     <button class="ibtn" onclick="doShare()"><i class="ti ti-brand-whatsapp"></i></button>
     <button class="ibtn" onclick="window.print()"><i class="ti ti-printer"></i></button>
   </div>
+</div>
+
+<div class="teens-toggle">
+    <button id="teensBtn" class="tgl-btn" onclick="toggleTeens()">
+        <i class="ti ti-sparkles"></i> MUDAR PARA VERSÃO TEENS
+    </button>
 </div>
 
 <div class="prog-wrap">
@@ -127,20 +146,95 @@ body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
 
 <script>
 const devs=[
-{dia:1,titulo:"O Senhor está perto",ref:"Salmos 34:18",verso:"O Senhor está perto dos que têm o coração quebrantado e salva os de espírito abatido.",reflexao:"A proximidade de Deus não depende das nossas circunstâncias — ela é uma realidade que precede nosso sofrimento. Antes mesmo de sentirmos a dor, Ele já Se inclina sobre nós. A Escritura não promete ausência de tribulação, mas algo mais profundo: a presença daquele que sustenta, mesmo quando tudo ao redor desmorona.",aplicacao:"Escreva três momentos em que você percebeu o cuidado de Deus mesmo em meio às dificuldades. Leia-os em voz alta como ato de fé, reconhecendo Sua fidelidade contínua.",oracao:"Senhor, que Se aproximas dos corações partidos, consola-me com Tua presença que excede toda compreensão. Que eu encontre, na fraqueza, a certeza inabalável do Teu amor. Amém."},
-{dia:2,titulo:"Esperança no deserto",ref:"Isaías 43:19",verso:"Eis que faço coisa nova; já está brotando; não a percebeis vós? Eis que porei um caminho no deserto e rios no ermo.",reflexao:"Deus não é reativo — Ele age antes que possamos ver o resultado. Quando o profeta anunciou a novidade, o povo ainda vivia o exílio. A esperança bíblica não é otimismo ingênuo; é certeza ancorada no caráter de um Deus que abre caminhos onde não há e faz brotar vida onde só havia árido silêncio.",aplicacao:"Escreva uma área da sua vida onde você deseja ver renovação. Entregue-a em oração, confiando que Deus já está agindo mesmo antes de você enxergar.",oracao:"Senhor do impossível, abre novos caminhos diante de mim e renova minha esperança. Que meus olhos percebam Tua ação mesmo onde tudo parece sem saída. Amém."},
-{dia:3,titulo:"Paz em meio à ansiedade",ref:"Filipenses 4:6-7",verso:"Não andeis ansiosos de coisa alguma; em tudo, porém, sejam conhecidas diante de Deus as vossas petições, pela oração e pela súplica, com ações de graças.",reflexao:"Paulo escreveu essas palavras de dentro de uma prisão — não de um retiro espiritual tranquilo. A paz que ele descreve não é produto de boas circunstâncias; é fruto do diálogo real com um Deus pessoal que ouve, age e sustenta. A oração não é técnica de relaxamento: é o canal pelo qual a presença de Deus guarda o que não conseguimos proteger.",aplicacao:"Faça uma lista das suas preocupações. Para cada uma, ore especificamente e encerre com uma ação de graças. Perceba como a gratidão reorienta o olhar.",oracao:"Pai fiel, tomo minhas ansiedades e as coloco nas Tvossas mãos. Enche-me com a paz que excede todo entendimento e guarda meu coração em Cristo Jesus. Amém."},
-{dia:4,titulo:"Força na fraqueza",ref:"2 Coríntios 12:9",verso:"A minha graça te basta, porque o meu poder se aperfeiçoa na fraqueza.",reflexao:"Há uma inversão profunda na lógica do Reino: é exatamente onde terminamos que Deus começa. Paulo pediu a remoção do que o afligia — a resposta que recebeu não foi eliminação, mas transformação. A fraqueza reconhecida não é derrota; é o espaço onde o poder de Deus encontra seu terreno mais fértil.",aplicacao:"Reconheça uma área de fraqueza pessoal. Em vez de a esconder, apresente-a a Deus como espaço para Sua glória. Ore pedindo que Ele opere onde você não pode.",oracao:"Senhor, que Tua graça suficiente seja minha força hoje. Que em minha limitação confessada, Teu poder se manifeste de maneiras que só a Ti glorificam. Amém."},
-{dia:5,titulo:"Alegria que vem do alto",ref:"Neemias 8:10",verso:"A alegria do Senhor é a vossa força.",reflexao:"Neemias falou isso num dia de lágrimas — o povo ouvia a Lei e chorava por suas falhas. A alegria bíblica não é superficial nem nega a dor; ela a transcende. É fundada não em momentos favoráveis, mas no caráter imutável de um Deus fiel. Por isso ela sustenta quando as emoções não sustentam, e persiste quando as circunstâncias desaparecem.",aplicacao:"Escolha uma atividade que lhe traga genuína alegria e faça-a como expressão de gratidão a Deus. Anote como a presença Dele permeia os momentos simples e belos da vida.",oracao:"Senhor eterno, enche meu coração de alegria verdadeira — não a do mundo que passa, mas a profunda e inabalável que nasce de conhecer-Te e ser por Ti amado. Amém."}
+{
+  dia:1,
+  titulo:"O Senhor está perto",
+  ref:"Salmos 34:18",
+  verso:"O Senhor está perto dos que têm o coração quebrantado e salva os de espírito abatido.",
+  reflexao:"A proximidade de Deus não depende das nossas circunstâncias — ela é uma realidade que precede nosso sofrimento. Antes mesmo de sentirmos a dor, Ele já Se inclina sobre nós.",
+  aplicacao:"Escreva três momentos em que você percebeu o cuidado de Deus mesmo em meio às dificuldades.",
+  oracao:"Senhor, consola-me com Tua presença que excede toda compreensão. Amém.",
+  t_titulo: "Deus tá do seu lado",
+  t_reflexao: "Sabe aquele dia que tudo dá errado e você só quer sumir? Saiba, Deus não tá longe, Ele tá aí do seu lado. Ele entende seu desabafo mesmo quando você nem sabe o que falar.",
+  t_aplicacao: "Pensa em um momento difícil dessa semana. Consegue ver como Deus te ajudou a segurar a barra?",
+  t_oracao: "Deus, obrigado por não me deixar sozinho na caminhada da vida. Por favor, fica perto de mim hoje e sempre. Amém."
+},
+{
+  dia:2,
+  titulo:"Esperança no deserto",
+  ref:"Isaías 43:19",
+  verso:"Eis que faço coisa nova; já está brotando; não a percebeis vós? Eis que porei um caminho no deserto e rios no ermo.",
+  reflexao:"Deus não é reativo — Ele age antes que possamos ver o resultado. A esperança bíblica não é otimismo ingênuo; é certeza ancorada no caráter de um Deus fiel.",
+  aplicacao:"Escreva uma área da sua vida onde você deseja ver renovação.",
+  oracao:"Senhor do impossível, abre novos caminhos diante de mim. Amém.",
+  t_titulo: "Algo novo tá vindo!",
+  t_reflexao: "Às vezes a gente foca tanto no que deu errado que nem vê as coisas novas que Deus tá preparando. Ele ama criar saídas onde todo mundo diz que não tem jeito.",
+  t_aplicacao: "O que você mais quer que mude na sua rotina? Entrega isso pra Deus agora e confia.",
+  t_oracao: "Pai, me ajude a ver as portas que o Senhor tá abrindo. Eu confio no Teu plano. Amém."
+},
+{
+  dia:3,
+  titulo:"Paz em meio à ansiedade",
+  ref:"Filipenses 4:6-7",
+  verso:"Não andeis ansiosos de coisa alguma; em tudo, porém, sejam conhecidas diante de Deus as vossas petições.",
+  reflexao:"A paz que Paulo descreve não é produto de boas circunstâncias; é fruto do diálogo real com um Deus pessoal que ouve, age e sustenta.",
+  aplicacao:"Faça uma lista das suas preocupações e as entregue em oração.",
+  oracao:"Pai fiel, enche-me com a paz que excede todo entendimento. Amém.",
+  t_titulo: "Xô, ansiedade!",
+  t_reflexao: "Muitas vozes dizem como você deve ser ou agir. Isso gera uma pressão monstra. Mas a Bíblia diz que você pode jogar toda essa pilha pra Deus. Ele troca o seu medo por paz.",
+  t_aplicacao: "Larga um pouco o celular hoje e fala pra Deus o que tá te deixando tenso. Desabafa!",
+  t_oracao: "Deus, tira esse peso do meu peito. Eu quero descansar no Teu cuidado. Amém."
+},
+{
+  dia:4,
+  titulo:"Força na fraqueza",
+  ref:"2 Coríntios 12:9",
+  verso:"A minha graça te basta, porque o meu poder se aperfeiçoa na fraqueza.",
+  reflexao:"Há uma inversão profunda na lógica do Reino: é exatamente onde terminamos que Deus começa. A fraqueza reconhecida é espaço para o poder de Deus.",
+  aplicacao:"Reconheça uma área de limitação e apresente-a a Deus como espaço para Sua glória.",
+  oracao:"Senhor, que Tua graça suficiente seja minha força hoje. Amém.",
+  t_titulo: "Fraco? Que nada!",
+  t_reflexao: "A gente tenta ser forte o tempo todo pra postar que tá tudo bem. Mas com Deus é diferente: quando a gente admite que não consegue sozinho, é aí que a força d'Ele entra em ação.",
+  t_aplicacao: "Sabe aquilo que você acha que não dá conta? Pede pra Deus te ajudar a carregar esse peso.",
+  t_oracao: "Senhor, quando eu me sentir fraco, me lembra que o Senhor é a minha força. Amém."
+},
+{
+  dia:5,
+  titulo:"Alegria que vem do alto",
+  ref:"Neemias 8:10",
+  verso:"A alegria do Senhor é a vossa força.",
+  reflexao:"A alegria bíblica não é superficial nem nega a dor; ela a transcende. É fundada no caráter imutável de um Deus fiel.",
+  aplicacao:"Escolha uma atividade simples que lhe traga alegria e faça-a como gratidão.",
+  oracao:"Senhor eterno, enche meu coração de alegria verdadeira e inabalável. Amém.",
+  t_titulo: "Alegria de verdade",
+  t_reflexao: "Não é sobre rir o tempo todo, mas sobre ter aquela paz lá no fundo que nada rouba. É saber que, não importa o que aconteça, você é amado pelo Criador.",
+  t_aplicacao: "Faça algo legal hoje, algo que te deixe feliz e agradeça a Deus por esse momento.",
+  t_oracao: "Deus, coloca no meu coração aquela alegria que não dependa de likes ou de aprovações de outras pessoas. Amém."
+}
 ];
 
-let cur=0,dark=false,audPlay=false,audProg=0,audMax=120,audItv=null,showAud=false;
+let cur=0, dark=false, isTeens=false, audPlay=false, audProg=0, audMax=120, audItv=null, showAud=false;
 const synth=window.speechSynthesis;
 
 function fmt(s){const m=Math.floor(s/60),sc=Math.floor(s%60);return m+':'+(sc<10?'0':'')+sc}
 
+function toggleTeens() {
+    isTeens = !isTeens;
+    const btn = document.getElementById('teensBtn');
+    document.getElementById('app').classList.toggle('teens-mode', isTeens);
+    btn.classList.toggle('active', isTeens);
+    btn.innerHTML = isTeens ? '<i class="ti ti-user"></i> VOLTAR PARA VERSÃO ANTERIOR' : '<i class="ti ti-sparkles"></i> MUDAR P/ VERSÃO TEENS';
+    stopAudio();
+    render();
+}
+
 function render(){
   const d=devs[cur];
+  const t = isTeens ? d.t_titulo : d.titulo;
+  const r = isTeens ? d.t_reflexao : d.reflexao;
+  const a = isTeens ? d.t_aplicacao : d.aplicacao;
+  const o = isTeens ? d.t_oracao : d.oracao;
+
   document.getElementById('dayLbl').textContent='Dia '+(cur+1)+' de '+devs.length;
   const dotsEl=document.getElementById('dots');
   dotsEl.innerHTML='';
@@ -153,16 +247,16 @@ function render(){
   document.getElementById('prevB').disabled=cur===0;
   document.getElementById('nextB').disabled=cur===devs.length-1;
 
-  const audBlock=showAud?`<div class="audio-row"><div class="audio-controls"><button class="play-btn" onclick="togglePlay()"><i class="ti ti-player-${audPlay?'pause':'play'}" id="playIco"></i></button><button class="stop-btn" onclick="stopAudio()"><i class="ti ti-x"></i></button></div><div class="a-info"><div class="a-name">${d.titulo}</div><div class="a-track"><div class="a-fill" id="aFill"></div></div><div class="a-time" id="aTime">0:00 / ${fmt(audMax)}</div></div></div>`:'';
+  const audBlock=showAud?`<div class="audio-row"><div class="audio-controls"><button class="play-btn" onclick="togglePlay()"><i class="ti ti-player-${audPlay?'pause':'play'}" id="playIco"></i></button><button class="stop-btn" onclick="stopAudio()"><i class="ti ti-x"></i></button></div><div class="a-info"><div class="a-name">${t}</div><div class="a-track"><div class="a-fill" id="aFill"></div></div><div class="a-time" id="aTime">0:00 / ${fmt(audMax)}</div></div></div>`:'';
 
   document.getElementById('main').innerHTML=`
-<div class="pill"><i class="ti ti-sun-high"></i> Inspiração do dia</div>
-<div class="day-title">${d.titulo}</div>
+<div class="pill"><i class="ti ti-${isTeens?'sparkles':'sun-high'}"></i> ${isTeens?'Papo de hoje':'Inspiração do dia'}</div>
+<div class="day-title">${t}</div>
 ${audBlock}
 <div class="verse-block"><i class="ti ti-quote"></i><div><div class="verse-ref">${d.ref}</div><div class="verse-txt">${d.verso}</div></div></div>
-<div class="sec"><div class="sec-lbl"><i class="ti ti-eye"></i> Reflexão</div><p>${d.reflexao}</p></div>
-<div class="sec"><div class="sec-lbl"><i class="ti ti-pencil"></i> Aplicação</div><p>${d.aplicacao}</p></div>
-<div class="sec"><div class="sec-lbl"><i class="ti ti-heart"></i> Oração</div><div class="prayer">${d.oracao}</div></div>`;
+<div class="sec"><div class="sec-lbl"><i class="ti ti-message-circle"></i> Reflexão</div><p>${r}</p></div>
+<div class="sec"><div class="sec-lbl"><i class="ti ti-${isTeens?'rocket':'pencil'}"></i> ${isTeens?'Desafio':'Aplicação'}</div><p>${a}</p></div>
+<div class="sec"><div class="sec-lbl"><i class="ti ti-heart"></i> Oração</div><div class="prayer">${o}</div></div>`;
   
   updateTopButton();
 }
@@ -196,7 +290,7 @@ function updateTopButton(){
 function handleAudio(){
   if(!showAud){
     showAud=true;
-    audPlay=true; // Já definimos como tocando antes de renderizar
+    audPlay=true;
     render();
     setTimeout(startRead,80);
     return;
@@ -212,7 +306,12 @@ function togglePlay(){
 
 function startRead(){
   const d=devs[cur];
-  const txt=d.titulo+'. '+d.verso+'. Reflexão: '+d.reflexao+' Aplicação: '+d.aplicacao+' Oração: '+d.oracao;
+  const t = isTeens ? d.t_titulo : d.titulo;
+  const r = isTeens ? d.t_reflexao : d.reflexao;
+  const a = isTeens ? d.t_aplicacao : d.aplicacao;
+  const o = isTeens ? d.t_oracao : d.oracao;
+
+  const txt=`${t}. ${d.verso}. Reflexão: ${r} ${isTeens?'Desafio':'Aplicação'}: ${a} Oração: ${o}`;
   synth.cancel();
   const u=new SpeechSynthesisUtterance(txt);
   u.lang='pt-BR';u.rate=0.95;
@@ -231,21 +330,11 @@ function updateAud(){
 
 function doShare(){
   const d=devs[cur];
+  const t = isTeens ? d.t_titulo : d.titulo;
+  const r = isTeens ? d.t_reflexao : d.reflexao;
   const pageLink = window.location.href;
-  const txt = '✨ *' + d.titulo + '*\n\n' +
-              '_' + d.ref + '_\n' +
-              '"' + d.verso + '"\n\n' +
-              '*Reflexão:*\n' + d.reflexao + '\n\n' +
-              '*Oração:*\n' + d.oracao + '\n\n' +
-              '─────────────────\n' +
-              '🔘 *LER COMPLETO E OUVIR ÁUDIO:*\n' + 
-              '👇 CLIQUE NO LINK ABAIXO\n' +
-              pageLink;
-
+  const txt = `✨ *${t}*\n\n_${d.ref}_\n"${d.verso}"\n\n*Reflexão:*\n${r}\n\nLink: ${pageLink}`;
   window.location.href = 'whatsapp://send?text=' + encodeURIComponent(txt);
-  setTimeout(() => {
-    if(document.hasFocus()) window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(txt), '_blank');
-  }, 500);
 }
 
 render();
