@@ -120,7 +120,7 @@ body{background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
 
 <div class="teens-toggle">
     <button id="teensBtn" class="tgl-btn" onclick="toggleTeens()">
-        <i class="ti ti-sparkles"></i> MUDAR PARA VERSÃO TEENS
+        <i class="ti ti-sparkles"></i> MUDAR P/ VERSÃO TEENS
     </button>
 </div>
 
@@ -213,6 +213,7 @@ const devs=[
 }
 ];
 
+
 let cur=0, dark=false, isTeens=false, audPlay=false, audProg=0, audMax=120, audItv=null, showAud=false;
 const synth=window.speechSynthesis;
 
@@ -223,7 +224,7 @@ function toggleTeens() {
     const btn = document.getElementById('teensBtn');
     document.getElementById('app').classList.toggle('teens-mode', isTeens);
     btn.classList.toggle('active', isTeens);
-    btn.innerHTML = isTeens ? '<i class="ti ti-user"></i> VOLTAR PARA VERSÃO ANTERIOR' : '<i class="ti ti-sparkles"></i> MUDAR P/ VERSÃO TEENS';
+    btn.innerHTML = isTeens ? '<i class="ti ti-user"></i> VOLTAR P/ VERSÃO ADULTA' : '<i class="ti ti-sparkles"></i> MUDAR P/ VERSÃO TEENS';
     stopAudio();
     render();
 }
@@ -329,12 +330,25 @@ function updateAud(){
 }
 
 function doShare(){
-  const d=devs[cur];
+  const d=devs[cur];
   const t = isTeens ? d.t_titulo : d.titulo;
   const r = isTeens ? d.t_reflexao : d.reflexao;
-  const pageLink = window.location.href;
-  const txt = `✨ *${t}*\n\n_${d.ref}_\n"${d.verso}"\n\n*Reflexão:*\n${r}\n\nLink: ${pageLink}`;
-  window.location.href = 'whatsapp://send?text=' + encodeURIComponent(txt);
+  const o = isTeens ? d.t_oracao : d.oracao;
+  const pageLink = window.location.href;
+  const txt = '✨ *' + t + '*\n\n' +
+              '_' + d.ref + '_\n' +
+              '"' + d.verso + '"\n\n' +
+              '*Reflexão:*\n' + r + '\n\n' +
+              '*Oração:*\n' + o + '\n\n' +
+              '─────────────────\n' +
+              '🔘 *LER COMPLETO E OUVIR ÁUDIO:*\n' + 
+              '👇 CLIQUE NO LINK ABAIXO\n' +
+              pageLink;
+
+  window.location.href = 'whatsapp://send?text=' + encodeURIComponent(txt);
+  setTimeout(() => {
+    if(document.hasFocus()) window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(txt), '_blank');
+  }, 500);
 }
 
 render();
